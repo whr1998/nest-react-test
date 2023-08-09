@@ -9,7 +9,10 @@ import {
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserDto } from './dto/user.dto';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiBearerAuth() // 使用 BearerAuth 授权
+@ApiTags('userController') // 在 suagger ui 中给api分类
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
