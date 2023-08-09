@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { addUserService } from "../../../api/user/user.service";
 
 export default function AddUser() {
   const [name, setName] = useState("");
@@ -23,19 +24,11 @@ export default function AddUser() {
       name,
       age,
     };
-    fetch("http://127.0.0.1/api/user/addUser", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(dataSource),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.code === 200) {
-          navigate("/");
-        }
-      });
+    addUserService(dataSource).then((res) => {
+      if (res.code === 200) {
+        navigate("/");
+      }
+    });
   }
   return (
     <Fragment>

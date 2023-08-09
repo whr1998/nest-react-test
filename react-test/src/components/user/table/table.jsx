@@ -1,17 +1,16 @@
 import React from "react";
 import classes from "./table.module.css";
 import { useEffect, useState } from "react";
+import { getUserInfoService } from "../../../api/user/user.service";
 
 export default function Table() {
   const [tableData, setTableData] = useState([]);
   useEffect(() => {
-    fetch("http://127.0.0.1/api/user/getUserInfo")
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.code === 200) {
-          setTableData(data.data);
-        }
-      });
+    getUserInfoService().then((res) => {
+      if (res.code === 200) {
+        setTableData(res.data);
+      }
+    });
   }, []);
   return (
     <table className={classes.table}>
