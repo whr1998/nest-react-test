@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ADD USER</title>
+    <style>
+      .container {
+        width: 600px;
+        margin: 0 auto;
+      }
+      #userList {
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
+      #userList tr {
+        line-height: 32px;
+      }
+      #userList tr td {
+        width: 200px;
+        text-align: center;
+        border: 1px solid rgba(0, 0, 0, 0.6);
+      }
+      #form div {
+        line-height: 48px;
+      }
+      #form div label {
+        width: 200px;
+      }
+      #form div input {
+        box-sizing: border-box;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>用户列表</h1>
+      <table id="userList"></table>
+      <form onsubmit="addUser(event)" id="form">
+        <div>
+          <label for="name">姓名：</label>
+          <input id="name" type="text" />
+        </div>
+        <div>
+          <label for="age">年龄：</label>
+          <input id="age" type="number" />
+        </div>
+        <div>
+          <input type="submit" value="添加" />
+        </div>
+      </form>
+    </div>
+  </body>
+
+  <script>
+    window.onload = getUser();
+
+    function getUser() {
+      fetch('http://127.0.0.1:3000/api/user/getUserInfo')
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.code === 200) {
+            let userStr = '';
+            for (let i = 0; i < data.data.length; i++) {
+              const item = data.data[i];
+              userStr += '<tr>';
+              userStr += `<td>${item._id}</td>`;
+              userStr += `<td>${item.name}</td>`;
+              userStr += `<td>${item.age}</td>`;
+              userStr += '</tr>';
+            }
+            document.getElementById('userList').innerHTML = userStr;
+          }
+        });
+    }
+
+    function addUser(event) {
+      event.preventDefault();
+      const name = document.getElementById('name').value;
+      const age =
+        document.getElementById('age').value != ''
+          ? Number(document.getElementById('age').value)
+          : document.getElementById('age').value;
+      const dataSource = {
+        name: name,
+        age: age,
+      };
+      fetch('http://127.0.0.1:3000/api/user/addUser', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dataSource),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.code === 200) {
+            getUser();
+            reset();
+          } else {
+            alert(data.msg);
+          }
+        });
+    }
+
+    function reset() {
+      document.getElementById('name').value = null;
+      document.getElementById('age').value = null;
+    }
+  </script>
+</html>

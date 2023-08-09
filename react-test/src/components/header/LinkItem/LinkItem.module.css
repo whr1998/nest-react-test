@@ -1,0 +1,17 @@
+.item {
+  height: inherit;
+  list-style: none;
+  margin-right: 16px;
+  cursor: pointer;
+  display: block;
+}
+
+.link {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  transition: all 0.3s;
+}
+
+.link:hover {
+  color: rgba(5, 39, 175, 0.8);
+}
