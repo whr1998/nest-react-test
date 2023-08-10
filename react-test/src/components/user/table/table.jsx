@@ -1,17 +1,7 @@
 import React from "react";
 import classes from "./table.module.css";
-import { useEffect, useState } from "react";
-import { getUserInfoService } from "../../../api/user/user.service";
 
-export default function Table() {
-  const [tableData, setTableData] = useState([]);
-  useEffect(() => {
-    getUserInfoService().then((res) => {
-      if (res.code === 200) {
-        setTableData(res.data);
-      }
-    });
-  }, []);
+export default function Table({ tableData, editUser }) {
   return (
     <table className={classes.table}>
       <tbody>
@@ -22,7 +12,11 @@ export default function Table() {
               <td>{item.name}</td>
               <td>{item.age}</td>
               <td>
-                <input type="button" value="编辑" />
+                <input
+                  type="button"
+                  value="编辑"
+                  onClick={() => editUser(item)}
+                />
               </td>
             </tr>
           );

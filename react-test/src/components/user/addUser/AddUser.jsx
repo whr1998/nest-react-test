@@ -1,55 +1,22 @@
-import React, { Fragment, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { addUserService } from "../../../api/user/user.service";
+import React, { Fragment, useRef } from "react";
 
-export default function AddUser() {
-  const [name, setName] = useState("");
-  const [age, setAge] = useState("");
-  const navigate = useNavigate();
-
-  function saveDataSource(formType) {
-    return (event) => {
-      const { value } = event.target;
-      if (formType === "name") {
-        setName(value);
-      }
-      if (formType === "age") {
-        setAge(Number(value));
-      }
-    };
-  }
-  function addUser(event) {
+export default function AddUser({ addUser }) {
+  const nameRef = useRef();
+  const ageRef = useRef();
+  function addUserHandle(event) {
     event.preventDefault();
-    const dataSource = {
-      name,
-      age,
-    };
-    addUserService(dataSource).then((res) => {
-      if (res.code === 200) {
-        navigate("/");
-      }
-    });
+    addUser(nameRef.current.value, Number(ageRef.current.value));
   }
   return (
     <Fragment>
-      <form onSubmit={addUser} id="form">
+      <form id="form" onSubmit={addUserHandle}>
         <div>
           <label htmlFor="name">姓名：</label>
-          <input
-            id="name"
-            type="text"
-            value={name}
-            onChange={saveDataSource("name")}
-          />
+          <input id="name" type="text" ref={nameRef} />
         </div>
         <div>
           <label htmlFor="age">年龄：</label>
-          <input
-            id="age"
-            type="number"
-            value={age}
-            onChange={saveDataSource("age")}
-          />
+          <input id="age" type="number" ref={ageRef} />
         </div>
         <div>
           <input type="submit" value="添加" />
