@@ -2,7 +2,6 @@ import React, { Fragment } from "react";
 import Table from "../../components/user/table/table";
 import { useEffect, useState } from "react";
 import { getUserInfoService } from "../../api/user/user.service";
-import Dialog from "../../components/dialog/Dialog";
 
 export default function UserListPage() {
   const [tableData, setTableData] = useState([]);
@@ -13,10 +12,7 @@ export default function UserListPage() {
       }
     });
   }, []);
-  function editUser(item) {
-    console.log(item);
-    <Dialog isOpen={true} />;
-  }
+  function editUser(item) {}
   return (
     <Fragment>
       <Table tableData={tableData} editUser={editUser} />
