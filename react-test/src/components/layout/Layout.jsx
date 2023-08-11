@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
-import Header from "../header/Header";
-import Footer from "../footer/Footer";
-import classes from './Layout.module.css'
+import Header from "../common/header/Header";
+import Footer from "../common/footer/Footer";
+import classes from "./Layout.module.css";
 
 export default function Layout({ children }) {
   return (
