@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import AddUser from "../../components/user/addUser/AddUser";
+import AddUser from "../../components/user/add-user/AddUser";
 import { addUserService } from "../../api/user/user.service";
 import { useNavigate } from "react-router-dom";
 
