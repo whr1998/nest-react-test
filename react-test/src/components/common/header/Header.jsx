@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./Header.module.css";
 import { LINKS } from "./Header.const";
-import LinkList from "./LinkList/LinkList";
+import LinkList from "./link-list/link-list";
 
 export default function Header() {
   return (

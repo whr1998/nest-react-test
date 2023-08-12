@@ -1,8 +1,8 @@
 import classes from "./App.module.css";
 import { Route, Routes } from "react-router-dom";
 import Layout from "./components/layout/Layout";
-import UserListPage from "./pages/user-list-page/UserListPage";
-import AddUserPage from "./pages/add-user-page/AddUserPage";
+import UserListPage from "./pages/user-list-page/user-list-page";
+import AddUserPage from "./pages/add-user-page/add-user-page";
 
 function App() {
   return (

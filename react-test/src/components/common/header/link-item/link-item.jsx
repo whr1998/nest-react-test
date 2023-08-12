@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./LinkItem.module.css";
+import classes from "./link-item.module.css";
 import { Link } from "react-router-dom";
 
 export default function LinkItem({ link }) {
